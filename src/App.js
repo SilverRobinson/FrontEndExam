@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
+//|===================| Keydown Event Listener |==================|//
 const usePress=()=>{
   const [press,setPress]=useState('')
   useEffect(()=>{
@@ -17,6 +18,7 @@ const usePress=()=>{
   })
   return press
 }
+//|===================| Keys Array |==============================|//
 const useKeyGen=({display})=>{
   const [key,setKey]=useState('AC')
   let keys=['AC','±','%','÷','7','8','9','×','4','5','6','-','1','2','3','+','0','.','='];
@@ -26,6 +28,7 @@ const useKeyGen=({display})=>{
   keys[0]=key
   return keys; 
 }
+//|===================| Function List |===========================|//
 const KeyFunc=(label,{memory,setMemory,display,setDisplay,operator,setOperator,keys})=>{
   let func=()=>{};
   keys.push("/");
@@ -69,6 +72,7 @@ const KeyFunc=(label,{memory,setMemory,display,setDisplay,operator,setOperator,k
   }
   return func
 } 
+//|===================| Button Component |---=====================|//
 const KeyButton=(label,idx,{memory,setMemory,display,setDisplay,operator,setOperator,keys})=>{
   let func=KeyFunc(label,{memory,setMemory,display,setDisplay,operator,setOperator,keys});
   return <div className={"item"+idx} onClick={func}>{label}</div>
@@ -113,6 +117,7 @@ const GenerateKeyPad=(keys,{memory,setMemory,display,setDisplay,operator,setOper
     return KeyButton(data,idx,{memory,setMemory,display,setDisplay,operator,setOperator,keys})
   })
 }
+//|===================| Key Press Trigger |=======================|//
 const useKeyPress=(label,{memory,setMemory,display,setDisplay,operator,setOperator,keys})=>{
   useEffect(()=>{
     KeyFunc(label,{memory,setMemory,display,setDisplay,operator,setOperator,keys})()
@@ -142,6 +147,5 @@ const App = () => {
     
   )
 }
-
-
+//|===============================================================|//
 export default App;
