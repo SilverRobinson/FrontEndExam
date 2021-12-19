@@ -31,10 +31,7 @@ const useKeyGen=({display})=>{
 //|===================| Function List |===========================|//
 const KeyFunc=(label,{memory,setMemory,display,setDisplay,operator,setOperator,keys})=>{
   let func=()=>{};
-  keys.push("/");
-  keys.push("*");
-  keys.push("Enter");
-  keys.push("Backspace");
+  keys=keys.concat(['/','*','Enter','Backspace','Escape'])
   if(keys.includes(label)){
     switch(label){
       case 'Backspace':
@@ -49,7 +46,7 @@ const KeyFunc=(label,{memory,setMemory,display,setDisplay,operator,setOperator,k
           }
         }        
       break;
-      case 'AC': case 'C': 
+      case 'AC': case 'C':  case 'Escape': 
         func=()=>Clear({memory,setMemory,display,setDisplay});
       break;
       case'+':  case '-': case '×': case '÷': case '%': case'=': case 'Enter':
@@ -66,6 +63,8 @@ const KeyFunc=(label,{memory,setMemory,display,setDisplay,operator,setOperator,k
         }
       break;  
       default: func=()=>{
+        if(label==='.' && display.toString().includes(label) && operator===false) return func
+        if(label==='0' && display.toString().length===1 && display===0)return func
         Press(label,{display,setDisplay,operator,memory,setMemory});
         setOperator(false)}
     }
