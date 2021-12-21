@@ -135,6 +135,7 @@ const App = () => {
     console.log("Sorry I don't know how to use this Use CallBack")
   },[])
   return (
+    <center>
     <div style={{maxWidth:"500px"}}>
       <div className='display'>
         {display}
@@ -143,6 +144,7 @@ const App = () => {
         {keypad}
       </div>
     </div>
+    </center>
     
   )
 }
